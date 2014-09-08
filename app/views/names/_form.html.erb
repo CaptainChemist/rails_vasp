@@ -1,0 +1,34 @@
+<%= form_for(@name) do |f| %>
+  <% if @name.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@name.errors.count, "error") %> prohibited this name from being saved:</h2>
+
+      <ul>
+      <% @name.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :calc_name %><br>
+    <%= f.text_field :calc_name %><br>
+    <%= f.label :calc_num %><br>
+    <%= f.text_field :calc_num %><br>
+    <%= f.label :atom_list %><br>
+    <%= f.text_field :atom_list %><br>
+    <%= f.label :orbital_list %><br>
+    <%= f.text_field :orbital_list %><br>
+    <%= f.label :cluster_list %><br>
+    <%= f.text_field :cluster_list %><br>
+    <%= f.label :bound %><br>
+    <%= f.text_field :bound %><br>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

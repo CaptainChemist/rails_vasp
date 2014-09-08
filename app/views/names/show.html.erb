@@ -1,0 +1,171 @@
+<style>
+
+    body {
+        font: 12px sans-serif;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+    .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+
+</style>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Calc name:</strong>
+  <%= @name.calc_name %>
+</p>
+<p><%= @name.calc_num %></p>
+
+<% @name.states.order('id ASC').each do |state| %>
+    <p>
+      <%= state.orbital_subset %>
+      <%= state.atom_subset %>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_name_path(@name) %> |
+<%= link_to 'Back', names_path %>
+
+<table>
+  <tr>
+  <% @name.states.order('id ASC').each_with_index do |state, i| %>
+
+      <script type="text/javascript">
+          energy= <%=raw state.energy_list%>.map(function(strVale) {
+              return Number(strVale);
+          });
+
+          data= <%=raw state.dos_list%>.map(function(strVale) {
+              return Number(strVale);
+          });
+
+          <% if i == 0 %>
+            document.write(energy+"<br>");
+          <% end %>
+          document.write(data+"<br>");
+      </script>
+  <% end %>
+</tr>
+</table>
+
+
+
+
+<p>
+<% @name.states.order('id ASC').each do |state| %>
+
+    <script type="text/javascript">
+        data= <%=raw state.energy_list%>.map(function(strVale) {
+            return Number(strVale);
+        });
+
+        energy= <%=raw state.dos_list%>.map(function(strVale) {
+            return Number(strVale);
+        });
+
+        elec_data = <%=raw state.elec_occ_list %>.map(function(strVale) {
+            return Number(strVale);
+        });
+
+        elec_energy = <%=raw state.elec_energy_list %>.map(function(strVale) {
+            return Number(strVale);
+        });
+
+        //First Put the Data in a 2D Results Array
+        var results = [];
+        var i = 0;
+        while (i < data.length) {
+            results[i] = [energy[i], data[i], elec_energy[i], elec_data[i]];
+            i++;
+        }
+        //Then, change the Data into an Object Array so you can refer to data using the bla.x or bla.y
+        results = results.map(function(d) {
+            return {
+                x: d[0],
+                y: d[1],
+                ex: d[2],
+                ey: d[3]
+            };
+        });
+
+        //Chart Formatting, first set margins and width/height
+        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+                width = 160 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+        var x = d3.scale.linear()
+                .range([0, width]);
+        var y = d3.scale.linear()
+                .range([height, 0]);
+        var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom");
+        var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left");
+
+        var line = d3.svg.area()
+                .x(function(d) { return x(d.x); })
+                .y(function(d) { return y(d.y); });
+
+        var svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        // Change orbital_subset designation to orbital type
+        dos_title=<%=raw state.orbital_subset %>;
+        switch (dos_title) {
+            case 0:
+                orbital = "s";
+                break;
+            case 1:
+                orbital = "p";
+                break;
+            case 2:
+                orbital = "d";
+                break;
+        }
+
+        x.domain(d3.extent(results, function(d) { return d.x; }));
+        y.domain(d3.extent(results, function(d) { return d.y; }));
+
+        svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", -40)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Density of States ("+orbital+") ("+<%=raw state.atom_subset %>+")");
+
+        svg.append("path")
+                .datum(results)
+                .attr("class", "line")
+                .attr("d", line);
+    </script>
+
+<% end %>
+</p>
