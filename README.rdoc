@@ -1,4 +1,4 @@
-== README
+== Rails App for Displaying VASP DOS Calculations
 
 This Rails Webapp is designed to allow easy viewing of density of state calculations that have been run with VASP an imported into a database.
 
@@ -8,7 +8,7 @@ Current features:
 
 • /names/:id -> Density of state calculations displayed with D3 which you can selectively display the orbitals you want
 
-Desired features
+Desired features:
 
 • Dynamically select colors for each DOS plot
 
