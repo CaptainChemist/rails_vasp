@@ -23,13 +23,12 @@ default: &default
 
 development:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  username: "medea"
-  password: "vaspdft"
-  host: "tim.selfip.org"
-  #port: "5423"
+  #adapter: postgresql
+  #encoding: unicode
+  #pool: 5
+  #username: "medea"
+  #password: "vaspdft"
+  #host: "tim.selfip.org"
   database: rails_vasp_development
 
   # The specified database role being used to connect to postgres.

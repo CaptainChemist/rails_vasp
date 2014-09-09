@@ -1,3 +1,4 @@
+
 <style>
 
     body {
@@ -21,6 +22,21 @@
         stroke-width: 1.5px;
     }
 
+    .s{
+        fill:red;
+        fill-opacity: .6;
+    }
+
+    .p{
+        fill:blue;
+        fill-opacity: .6;
+    }
+
+    .d{
+        fill:green;
+        fill-opacity: .6;
+    }
+
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -31,141 +47,189 @@
 </p>
 <p><%= @name.calc_num %></p>
 
-<% @name.states.order('id ASC').each do |state| %>
-    <p>
-      <%= state.orbital_subset %>
-      <%= state.atom_subset %>
-    </p>
-<% end %>
-
 <%= link_to 'Edit', edit_name_path(@name) %> |
 <%= link_to 'Back', names_path %>
 
+
+    <table>
+        <tr>
+            <th>Atoms</th>
+            <th>s</th>
+            <th>p</th>
+            <th>d</th>
+        </tr>
+        <tr>
+            <% newAtom = 0 %>
+            <% @name.states.order('id ASC').each_with_index do |state, i| %>
+
+                <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
+
+                <% if state.orbital_subset == 0 && newAtom != 0 %>
+                    </tr>
+                    <% newAtom = 0 %>
+                <% end %>
+
+                <% if state.orbital_subset == 0 %>
+                    <td><%= state.atom_subset %></td>
+                    <td>
+                        <input id="<%=identifier %>" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
+                        <label for="<%=identifier %>"><%=identifier %></label>
+                    </td>
+                    <% newAtom += 1 %>
+                <% elsif state.orbital_subset == 1 %>
+                    <td>
+                        <input id="<%=identifier %>" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
+                        <label for="<%=identifier %>"><%=identifier %></label>
+                    </td>
+
+                <% else state.orbital_subset == 2 %>
+                    <td>
+                        <input id="<%=identifier %>" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
+                        <label for="<%=identifier %>"><%=identifier %></label>
+                    </td>
+                <% end %>
+            <% end %>
+        </tr>
+    </table>
+
+
+
 <table>
   <tr>
-  <% @name.states.order('id ASC').each_with_index do |state, i| %>
+    <script type="text/javascript">
+        var xMax = 3.5,
+            xMin = 0,
+            yMax = 4,
+            yMin = -15;
 
-      <script type="text/javascript">
-          energy= <%=raw state.energy_list%>.map(function(strVale) {
-              return Number(strVale);
-          });
+        results = [];
+        <% @name.states.order('id ASC').each_with_index do |state, i| %>
 
-          data= <%=raw state.dos_list%>.map(function(strVale) {
-              return Number(strVale);
-          });
+            data= <%=raw state.energy_list%>.map(function(strVale) {
+                return Number(strVale);
+            });
 
-          <% if i == 0 %>
-            document.write(energy+"<br>");
-          <% end %>
-          document.write(data+"<br>");
-      </script>
-  <% end %>
+            energy= <%=raw state.dos_list%>.map(function(strVale) {
+                return Number(strVale);
+            });
+
+            tempResults =[];
+            var i = 0;
+            while (i < data.length) {
+                tempResults[i] = [energy[i], data[i]];
+                i++;
+            }
+            
+            tempResults = tempResults.map(function(d) {
+                return {
+                    x: d[0],
+                    y: d[1],
+                    orbital:String("id" + <%=state.orbital_subset.to_s%> + <%=state.atom_subset[0].to_s %>)
+                };
+            });
+
+            results.push(tempResults);
+            //limit num of plots to 2 for now
+            <% if i > 3 %>
+                <% break %>
+            <% end %>
+
+        <% end %>
+
+        var width = 500,
+        height = 500,
+        margin = 30,
+        duration = 500,
+        x = d3.scale.linear() 
+            .domain([xMin, xMax])
+            .range([margin, width - margin]),
+        y = d3.scale.linear()
+            .domain([yMin, yMax])
+            .range([height - margin, margin]);
+            
+        var line = d3.svg.line()
+            .x(function(d){return x(d.x);})
+            .y(function(d){return y(d.y);});
+
+        var svg = d3.select("body")
+            .append("svg:svg")
+            .attr("height", height)
+            .attr("width", width);
+
+        var area = d3.svg.area() 
+            .x(function(d) { return x(d.x); }) 
+            .y0(y(0)) 
+            .y1(function(d) { return y(d.y); });       
+
+        svg.selectAll("path.area")
+                .data(results)
+            .enter()
+                .append("path")
+                //.attr("class", "area")
+                .attr("id", function(d){
+                    return d[0].orbital;
+                })
+                .attr("class", function(d){
+                    var t = parseInt(d[0].orbital.substring(2,3));
+                    switch (t){
+                        case 0:
+                            console.log("s selected")
+                            return "class s";
+                        case 1:
+                            return "class p";
+                        case 2:
+                            return "class d";
+                    }
+                })
+                .attr("d", function(d){return area(d);});
+
+        renderAxes(svg);  
+
+        function renderAxes(svg){            
+            var xAxis = d3.svg.axis()
+                    .scale(d3.scale.linear()
+                    .domain([xMin,xMax])
+                    .range([0, quadrantWidth()]))
+                    .orient("bottom");            
+                    
+            var yAxis = d3.svg.axis()
+                    .scale(d3.scale.linear()
+                    .domain([yMin,yMax])
+                    .range([quadrantHeight(), 0]))
+                    .orient("left");
+            
+            svg.append("g")        
+                .attr("class", "axis")
+                .attr("transform", function(){
+                    return "translate(" + xStart() + "," + yStart() + ")";
+                })
+                .call(xAxis);
+                
+            svg.append("g")        
+                .attr("class", "axis")
+                .attr("transform", function(){
+                    return "translate(" + xStart() + "," + yEnd() + ")";
+                })
+                .call(yAxis);
+        } 
+
+        function xStart(){return margin;}        
+        function yStart(){return height - margin;}
+        function xEnd(){return width - margin;}
+        function yEnd(){return margin;}
+        function quadrantWidth(){return width - 2 * margin;}
+        function quadrantHeight(){return height - 2 * margin;}
+
+        <% @name.states.order('id ASC').each_with_index do |state, i| %>
+            <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
+            d3.selectAll("input[value=<%=identifier %>]").on("change", function(){
+                <% identifier = "#"+identifier %>
+                svg.selectAll("<%=identifier %>")
+                .style("display", this.checked ? null : "none");
+            });
+        <% end %>
+
+
+  </script>
 </tr>
 </table>
-
-
-
-
-<p>
-<% @name.states.order('id ASC').each do |state| %>
-
-    <script type="text/javascript">
-        data= <%=raw state.energy_list%>.map(function(strVale) {
-            return Number(strVale);
-        });
-
-        energy= <%=raw state.dos_list%>.map(function(strVale) {
-            return Number(strVale);
-        });
-
-        elec_data = <%=raw state.elec_occ_list %>.map(function(strVale) {
-            return Number(strVale);
-        });
-
-        elec_energy = <%=raw state.elec_energy_list %>.map(function(strVale) {
-            return Number(strVale);
-        });
-
-        //First Put the Data in a 2D Results Array
-        var results = [];
-        var i = 0;
-        while (i < data.length) {
-            results[i] = [energy[i], data[i], elec_energy[i], elec_data[i]];
-            i++;
-        }
-        //Then, change the Data into an Object Array so you can refer to data using the bla.x or bla.y
-        results = results.map(function(d) {
-            return {
-                x: d[0],
-                y: d[1],
-                ex: d[2],
-                ey: d[3]
-            };
-        });
-
-        //Chart Formatting, first set margins and width/height
-        var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                width = 160 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-        var x = d3.scale.linear()
-                .range([0, width]);
-        var y = d3.scale.linear()
-                .range([height, 0]);
-        var xAxis = d3.svg.axis()
-                .scale(x)
-                .orient("bottom");
-        var yAxis = d3.svg.axis()
-                .scale(y)
-                .orient("left");
-
-        var line = d3.svg.area()
-                .x(function(d) { return x(d.x); })
-                .y(function(d) { return y(d.y); });
-
-        var svg = d3.select("body").append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        // Change orbital_subset designation to orbital type
-        dos_title=<%=raw state.orbital_subset %>;
-        switch (dos_title) {
-            case 0:
-                orbital = "s";
-                break;
-            case 1:
-                orbital = "p";
-                break;
-            case 2:
-                orbital = "d";
-                break;
-        }
-
-        x.domain(d3.extent(results, function(d) { return d.x; }));
-        y.domain(d3.extent(results, function(d) { return d.y; }));
-
-        svg.append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
-
-        svg.append("g")
-                .attr("class", "y axis")
-                .call(yAxis)
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", -40)
-                .attr("dy", ".71em")
-                .style("text-anchor", "end")
-                .text("Density of States ("+orbital+") ("+<%=raw state.atom_subset %>+")");
-
-        svg.append("path")
-                .datum(results)
-                .attr("class", "line")
-                .attr("d", line);
-    </script>
-
-<% end %>
-</p>
