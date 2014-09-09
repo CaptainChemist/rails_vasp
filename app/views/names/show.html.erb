@@ -72,25 +72,25 @@
                 <% if state.orbital_subset == 0 %>
                     <td><%= state.atom_subset %></td>
                     <td>
-                        <input id="<%=identifier %>" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                        <label for="<%=identifier %>"><%=identifier %></label>
+                        <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
                     </td>
                     <% newAtom += 1 %>
                 <% elsif state.orbital_subset == 1 %>
                     <td>
-                        <input id="<%=identifier %>" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                        <label for="<%=identifier %>"><%=identifier %></label>
+                        <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
                     </td>
 
                 <% else state.orbital_subset == 2 %>
                     <td>
-                        <input id="<%=identifier %>" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                        <label for="<%=identifier %>"><%=identifier %></label>
+                        <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
                     </td>
                 <% end %>
             <% end %>
         </tr>
     </table>
+    <br>
+    Select/Deselect All <input type="checkbox" id="selectall" checked/>
+
 
 
 
@@ -169,11 +169,11 @@
                     switch (t){
                         case 0:
                             console.log("s selected")
-                            return "class s";
+                            return "orb class s";
                         case 1:
-                            return "class p";
+                            return "orb class p";
                         case 2:
-                            return "class d";
+                            return "orb class d";
                     }
                 })
                 .attr("d", function(d){return area(d);});
@@ -215,9 +215,13 @@
         function quadrantWidth(){return width - 2 * margin;}
         function quadrantHeight(){return height - 2 * margin;}
 
+
+        
+
         <% @name.states.order('id ASC').each_with_index do |state, i| %>
             <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
             d3.selectAll("input[value=<%=identifier %>]").on("change", function(){
+                console.log("input[value=<%=identifier %>]")
                 <% identifier = "#"+identifier %>
                 svg.selectAll("<%=identifier %>")
                 .style("display", this.checked ? null : "none");
@@ -225,6 +229,33 @@
         <% end %>
 
 
+
+
+
   </script>
 </tr>
 </table>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#selectall').click(function(event) {  //on click 
+        console.log("checked");
+        if(this.checked) { // check select status
+            $('.checkbox').each(function() { //loop through each checkbox
+                this.checked = true;
+                });  
+            svg.selectAll(".orb").style("display", null);
+
+
+        }else{
+            $('.checkbox').each(function() { //loop through each checkbox
+                this.checked = false;
+          
+            }); 
+            svg.selectAll(".orb").style("display", "none");        
+        }
+    });
+    
+});
+            
+</script>
