@@ -22882,3 +22882,499 @@ Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 00:44:02 -050
 
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 00:44:02 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (5.7ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (24.9ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (100.5ms)
+Completed 200 OK in 217ms (Views: 140.4ms | ActiveRecord: 53.3ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:01:58 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.4ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (5.2ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (40.6ms)
+Completed 200 OK in 48ms (Views: 40.2ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:12 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.3ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (4.9ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (45.3ms)
+Completed 200 OK in 52ms (Views: 45.2ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:02:23 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:03:16 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.6ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (4.8ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (42.7ms)
+Completed 200 OK in 50ms (Views: 42.9ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:17 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.3ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (5.1ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (41.0ms)
+Completed 200 OK in 47ms (Views: 40.7ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:03:24 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.3ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (5.1ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (51.7ms)
+Completed 200 OK in 59ms (Views: 51.9ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:09:32 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.3ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (5.1ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (43.4ms)
+Completed 200 OK in 50ms (Views: 43.3ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:13:16 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.2ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (5.1ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (47.9ms)
+Completed 200 OK in 55ms (Views: 48.7ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:40 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:16:41 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.2ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (4.9ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.1ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (39.3ms)
+Completed 200 OK in 46ms (Views: 39.6ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:00 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.3ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (4.7ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (41.7ms)
+Completed 200 OK in 49ms (Views: 42.1ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:06 -0500
+
+
+Started GET "/names/1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (0.2ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (5.8ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (81.5ms)
+Completed 200 OK in 88ms (Views: 80.5ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-09 08:28:48 -0500
+
+
+Started GET "/names/2" for 127.0.0.1 at 2014-09-09 08:32:48 -0500
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mName Load (0.2ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mState Load (22.4ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 2]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 2]]
+  Rendered names/show.html.erb within layouts/application (94.7ms)
+Completed 200 OK in 102ms (Views: 78.0ms | ActiveRecord: 22.6ms)

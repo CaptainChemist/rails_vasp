@@ -129,10 +129,6 @@
             });
 
             results.push(tempResults);
-            //limit num of plots to 2 for now
-            <% if i > 3 %>
-                <% break %>
-            <% end %>
 
         <% end %>
 
@@ -158,14 +154,13 @@
 
         var area = d3.svg.area() 
             .x(function(d) { return x(d.x); }) 
-            .y0(y(0)) 
+            .y0(yStart()) 
             .y1(function(d) { return y(d.y); });       
 
         svg.selectAll("path.area")
                 .data(results)
             .enter()
                 .append("path")
-                //.attr("class", "area")
                 .attr("id", function(d){
                     return d[0].orbital;
                 })
