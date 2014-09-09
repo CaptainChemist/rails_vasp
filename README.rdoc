@@ -5,11 +5,15 @@ This Rails Webapp is designed to allow easy viewing of density of state calculat
 Current features:
 
 • /names/ -> a listing of all calculations which you can click on and see saved DOS
+
 • /names/:id -> Density of state calculations displayed with D3 which you can selectively display the orbitals you want
 
 Desired features
 
 • Dynamically select colors for each DOS plot
+
 • Provide a method on the /names/ page to select particular calculations and corresponding orbitals. Each calculation would have a separate plot and the orbitals would all overlay in that plot. D3 would know how many calculations you wanted to display and confine all plots to the same 3.1"x3.1" area in the browser.
+
 • Convert atom numbers into the atom type ex: "64","43","24" -> S$_{3}$
+
 • New calculations page for specifying the calculation number, name, and desired orbital clustering which would get entered into the database, and then run the corresponding python script to populate all the data.
