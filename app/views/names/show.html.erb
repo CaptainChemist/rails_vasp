@@ -1,10 +1,8 @@
 
 <style>
-
     body {
         font: 12px sans-serif;
     }
-
     .axis path,
     .axis line {
         fill: none;
@@ -21,22 +19,18 @@
         stroke: steelblue;
         stroke-width: 1.5px;
     }
-
     .s{
         fill:red;
         fill-opacity: .6;
     }
-
     .p{
         fill:blue;
         fill-opacity: .6;
     }
-
     .d{
         fill:green;
         fill-opacity: .6;
     }
-
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -50,49 +44,45 @@
 <%= link_to 'Edit', edit_name_path(@name) %> |
 <%= link_to 'Back', names_path %>
 
+<table>
+    <tr>
+        <th>Atoms</th>
+        <th>s</th>
+        <th>p</th>
+        <th>d</th>
+    </tr>
+    <tr>
+        <% newAtom = 0 %>
+        <% @name.states.order('id ASC').each_with_index do |state, i| %>
 
-    <table>
-        <tr>
-            <th>Atoms</th>
-            <th>s</th>
-            <th>p</th>
-            <th>d</th>
-        </tr>
-        <tr>
-            <% newAtom = 0 %>
-            <% @name.states.order('id ASC').each_with_index do |state, i| %>
+            <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
 
-                <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
-
-                <% if state.orbital_subset == 0 && newAtom != 0 %>
-                    </tr>
-                    <% newAtom = 0 %>
-                <% end %>
-
-                <% if state.orbital_subset == 0 %>
-                    <td><%= state.atom_subset %></td>
-                    <td>
-                        <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                    </td>
-                    <% newAtom += 1 %>
-                <% elsif state.orbital_subset == 1 %>
-                    <td>
-                        <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                    </td>
-
-                <% else state.orbital_subset == 2 %>
-                    <td>
-                        <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                    </td>
-                <% end %>
+            <% if state.orbital_subset == 0 && newAtom != 0 %>
+                </tr>
+                <% newAtom = 0 %>
             <% end %>
-        </tr>
-    </table>
-    <br>
-    Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
+            <% if state.orbital_subset == 0 %>
+                <td><%= state.atom_subset %></td>
+                <td>
+                    <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
+                </td>
+                <% newAtom += 1 %>
+            <% elsif state.orbital_subset == 1 %>
+                <td>
+                    <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
+                </td>
 
-
+            <% else state.orbital_subset == 2 %>
+                <td>
+                    <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
+                </td>
+            <% end %>
+        <% end %>
+    </tr>
+</table>
+<br>
+Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
 <table>
   <tr>
@@ -168,7 +158,6 @@
                     var t = parseInt(d[0].orbital.substring(2,3));
                     switch (t){
                         case 0:
-                            console.log("s selected")
                             return "orb class s";
                         case 1:
                             return "orb class p";
@@ -215,47 +204,31 @@
         function quadrantWidth(){return width - 2 * margin;}
         function quadrantHeight(){return height - 2 * margin;}
 
-
-        
-
         <% @name.states.order('id ASC').each_with_index do |state, i| %>
             <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
             d3.selectAll("input[value=<%=identifier %>]").on("change", function(){
-                console.log("input[value=<%=identifier %>]")
                 <% identifier = "#"+identifier %>
                 svg.selectAll("<%=identifier %>")
                 .style("display", this.checked ? null : "none");
             });
         <% end %>
 
-
-
-
+        $(document).ready(function() {
+            $('#selectall').click(function(event) {  //on click 
+                if(this.checked) { // check select status
+                    $('.checkbox').each(function() { //loop through each checkbox
+                        this.checked = true;
+                        });  
+                    svg.selectAll(".orb").style("display", null);
+                }else{
+                    $('.checkbox').each(function() { //loop through each checkbox
+                        this.checked = false;      
+                    }); 
+                    svg.selectAll(".orb").style("display", "none");        
+                }
+            });    
+        });
 
   </script>
 </tr>
 </table>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#selectall').click(function(event) {  //on click 
-        console.log("checked");
-        if(this.checked) { // check select status
-            $('.checkbox').each(function() { //loop through each checkbox
-                this.checked = true;
-                });  
-            svg.selectAll(".orb").style("display", null);
-
-
-        }else{
-            $('.checkbox').each(function() { //loop through each checkbox
-                this.checked = false;
-          
-            }); 
-            svg.selectAll(".orb").style("display", "none");        
-        }
-    });
-    
-});
-            
-</script>
