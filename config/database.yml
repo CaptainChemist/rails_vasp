@@ -27,7 +27,7 @@ development:
   #encoding: unicode
   #pool: 5
   #username: "medea"
-  #password: "vaspdft"
+  #password: "Py7CrNpdABnKLxTVrwza"
   #host: "tim.selfip.org"
   database: rails_vasp_development
 

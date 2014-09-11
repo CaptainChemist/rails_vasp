@@ -31,6 +31,28 @@
         fill:green;
         fill-opacity: .6;
     }
+
+    svg {
+      font: 10px sans-serif;
+    }
+
+    .area {
+      fill: steelblue;
+      clip-path: url(#clip);
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .brush .extent {
+      stroke: #fff;
+      fill-opacity: .125;
+      shape-rendering: crispEdges;
+    }
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -83,152 +105,138 @@
 </table>
 <br>
 Select/Deselect All <input type="checkbox" id="selectall" checked/>
+<br>
 
-<table>
-  <tr>
-    <script type="text/javascript">
-        var xMax = 3.5,
-            xMin = 0,
-            yMax = 4,
-            yMin = -15;
+<script type="text/javascript">
+    var results =[];
+    <% @name.states.order('id ASC').each_with_index do |state, i| %>
 
-        results = [];
-        <% @name.states.order('id ASC').each_with_index do |state, i| %>
-
-            data= <%=raw state.energy_list%>.map(function(strVale) {
-                return Number(strVale);
-            });
-
-            energy= <%=raw state.dos_list%>.map(function(strVale) {
-                return Number(strVale);
-            });
-
-            tempResults =[];
-            var i = 0;
-            while (i < data.length) {
-                tempResults[i] = [energy[i], data[i]];
-                i++;
-            }
-            
-            tempResults = tempResults.map(function(d) {
-                return {
-                    x: d[0],
-                    y: d[1],
-                    orbital:String("id" + <%=state.orbital_subset.to_s%> + <%=state.atom_subset[0].to_s %>)
-                };
-            });
-
-            results.push(tempResults);
-
-        <% end %>
-
-        var width = 500,
-        height = 500,
-        margin = 30,
-        duration = 500,
-        x = d3.scale.linear() 
-            .domain([xMin, xMax])
-            .range([margin, width - margin]),
-        y = d3.scale.linear()
-            .domain([yMin, yMax])
-            .range([height - margin, margin]);
-            
-        var line = d3.svg.line()
-            .x(function(d){return x(d.x);})
-            .y(function(d){return y(d.y);});
-
-        var svg = d3.select("body")
-            .append("svg:svg")
-            .attr("height", height)
-            .attr("width", width);
-
-        var area = d3.svg.area() 
-            .x(function(d) { return x(d.x); }) 
-            .y0(yStart()) 
-            .y1(function(d) { return y(d.y); });       
-
-        svg.selectAll("path.area")
-                .data(results)
-            .enter()
-                .append("path")
-                .attr("id", function(d){
-                    return d[0].orbital;
-                })
-                .attr("class", function(d){
-                    var t = parseInt(d[0].orbital.substring(2,3));
-                    switch (t){
-                        case 0:
-                            return "orb class s";
-                        case 1:
-                            return "orb class p";
-                        case 2:
-                            return "orb class d";
-                    }
-                })
-                .attr("d", function(d){return area(d);});
-
-        renderAxes(svg);  
-
-        function renderAxes(svg){            
-            var xAxis = d3.svg.axis()
-                    .scale(d3.scale.linear()
-                    .domain([xMin,xMax])
-                    .range([0, quadrantWidth()]))
-                    .orient("bottom");            
-                    
-            var yAxis = d3.svg.axis()
-                    .scale(d3.scale.linear()
-                    .domain([yMin,yMax])
-                    .range([quadrantHeight(), 0]))
-                    .orient("left");
-            
-            svg.append("g")        
-                .attr("class", "axis")
-                .attr("transform", function(){
-                    return "translate(" + xStart() + "," + yStart() + ")";
-                })
-                .call(xAxis);
-                
-            svg.append("g")        
-                .attr("class", "axis")
-                .attr("transform", function(){
-                    return "translate(" + xStart() + "," + yEnd() + ")";
-                })
-                .call(yAxis);
-        } 
-
-        function xStart(){return margin;}        
-        function yStart(){return height - margin;}
-        function xEnd(){return width - margin;}
-        function yEnd(){return margin;}
-        function quadrantWidth(){return width - 2 * margin;}
-        function quadrantHeight(){return height - 2 * margin;}
-
-        <% @name.states.order('id ASC').each_with_index do |state, i| %>
-            <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
-            d3.selectAll("input[value=<%=identifier %>]").on("change", function(){
-                <% identifier = "#"+identifier %>
-                svg.selectAll("<%=identifier %>")
-                .style("display", this.checked ? null : "none");
-            });
-        <% end %>
-
-        $(document).ready(function() {
-            $('#selectall').click(function(event) {  //on click 
-                if(this.checked) { // check select status
-                    $('.checkbox').each(function() { //loop through each checkbox
-                        this.checked = true;
-                        });  
-                    svg.selectAll(".orb").style("display", null);
-                }else{
-                    $('.checkbox').each(function() { //loop through each checkbox
-                        this.checked = false;      
-                    }); 
-                    svg.selectAll(".orb").style("display", "none");        
-                }
-            });    
+        data= <%=raw state.energy_list%>.map(function(strVale) {
+            return Number(strVale);
         });
 
-  </script>
-</tr>
-</table>
+        energy= <%=raw state.dos_list%>.map(function(strVale) {
+            return Number(strVale);
+        });
+
+        tempResults =[];
+        var i = 0;
+        while (i < data.length) {
+            tempResults[i] = [energy[i], data[i]];
+            i++;
+        }
+        
+        tempResults = tempResults.map(function(d) {
+            return {
+                x: d[1],
+                y: d[0],
+                orbital:String("id" + <%=state.orbital_subset.to_s%> + <%=state.atom_subset[0].to_s %>)
+            };
+        });
+
+        results.push(tempResults);
+
+        <% if i == 1 %>
+            <% break %>
+        <% end %>
+
+    <% end %>
+
+
+    var margin = {top: 10, right: 10, bottom: 100, left: 40},
+        margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom,
+        height2 = 500 - margin2.top - margin2.bottom;
+
+    var x = d3.scale.linear().range([0, width]),
+        x2 = d3.scale.linear().range([0, width]),
+        y = d3.scale.linear().range([height, 0]),
+        y2 = d3.scale.linear().range([height2, 0]);
+
+    var xAxis = d3.svg.axis().scale(x).orient("bottom"),
+        xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
+        yAxis = d3.svg.axis().scale(y).orient("left");
+
+    var brush = d3.svg.brush()
+        .x(x2)
+        .on("brush", brushed);
+
+    var area = d3.svg.area()
+        .interpolate("monotone")
+        .x(function(d) { return x(d.x); })
+        .y0(height)
+        .y1(function(d) { return y(d.y); });
+
+    var area2 = d3.svg.area()
+        .interpolate("monotone")
+        .x(function(d) { return x2(d.x); })
+        .y0(height2)
+        .y1(function(d) { return y2(d.y); });
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+
+    svg.append("defs").append("clipPath")
+        .attr("id", "clip")
+      .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+    var focus = svg.append("g")
+        .attr("class", "focus")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var context = svg.append("g")
+        .attr("class", "context")
+        .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+    function dosPlot(results) {
+        console.log(results);
+      x.domain([-15, 4]);
+      y.domain([0, 4]);
+      x2.domain(x.domain());
+      y2.domain(y.domain());
+
+      focus.append("path")
+          .data(results)
+          .attr("class", "area")
+          .attr("d", area);
+
+      focus.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      focus.append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
+
+      context.append("path")
+          .data(results)
+          .attr("class", "area")
+          .attr("d", area2);
+
+      context.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height2 + ")")
+          .call(xAxis2);
+
+      context.append("g")
+          .attr("class", "x brush")
+          .call(brush)
+        .selectAll("rect")
+          .attr("y", -6)
+          .attr("height", height2 + 7);
+    }
+
+    dosPlot(results);
+
+    function brushed() {
+      x.domain(brush.empty() ? x2.domain() : brush.extent());
+      focus.select(".area").attr("d", area);
+      focus.select(".x.axis").call(xAxis);
+    }
+
+</script>
