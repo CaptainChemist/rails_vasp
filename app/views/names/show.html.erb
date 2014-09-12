@@ -10,10 +10,6 @@
         shape-rendering: crispEdges;
     }
 
-    .x.axis path {
-        display: none;
-    }
-
     .line {
         fill: none;
         stroke: steelblue;
@@ -36,13 +32,14 @@
     }
 
     svg {
-      font: 10px sans-serif;
+      font: 14px sans-serif;
     }
 
     .axis path,
     .axis line {
       fill: none;
       stroke: #000;
+      stroke-width: 1.5px;
       shape-rendering: crispEdges;
     }
 
@@ -104,6 +101,29 @@
 <br>
 Select/Deselect All <input type="checkbox" id="selectall" checked/>
 <br>
+<br>
+
+
+<script type="text/javascript">
+    function changeAxis(val) {
+        console.log(val);
+    }
+
+    function updateTextInput(val) {
+      document.getElementById('yMaxInput').value=val;
+      changeAxis(val); 
+    }
+
+    function updateRangeInput(val) {
+      document.getElementById('yMaxRange').value=val;
+      changeAxis(val); 
+    }
+</script>
+
+Y Max: 
+<input type="text" id="yMaxInput" value="10" min="0" max="50" onchange="updateRangeInput(this.value)">
+<input type="range" name="rangeInput" id="yMaxRange" min="0" max="50" value="10" onchange="updateTextInput(this.value);">                                                       
+<br>
 
 <script type="text/javascript">
     var results =[];
@@ -134,12 +154,7 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
         results.push(tempResults);
 
-        <% if i == 2 %>
-            <% break %>
-        <% end %>
-
     <% end %>
-    console.log(results);
 
     var margin = {top: 10, right: 10, bottom: 100, left: 40},
         margin2 = {top: 430, right: 10, bottom: 20, left: 40},
@@ -193,7 +208,7 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
     function dosPlot(results) {
       x.domain([-15, 4]);
-      y.domain([0, 3]);
+      y.domain([0, document.getElementById('yMaxInput').value]);
       x2.domain(x.domain());
       y2.domain(y.domain());
 
@@ -258,5 +273,52 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
       focus.selectAll(".area").attr("d", area);
       focus.select(".x.axis").call(xAxis);
     }
+
+</script>
+
+<script type="text/javascript">
+
+    <% @name.states.order('id ASC').each_with_index do |state, i| %>
+        <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
+        d3.selectAll("input[value=<%=identifier %>]").on("change", function(){
+            <% identifier = "#"+identifier %>
+            svg.selectAll("<%=identifier %>")
+            .style("display", this.checked ? null : "none");
+        });
+    <% end %>
+
+
+    $(document).ready(function() {
+        $('#selectall').click(function(event) {  //on click 
+            if(this.checked) { // check select status
+                $('.checkbox').each(function() { //loop through each checkbox
+                    this.checked = true;
+                    });  
+                svg.selectAll(".orb").style("display", null);
+
+
+            }else{
+                $('.checkbox').each(function() { //loop through each checkbox
+                    this.checked = false;
+              
+                }); 
+                svg.selectAll(".orb").style("display", "none");        
+            }
+        });
+
+        $('#yMaxInput').keypress(function(){
+
+
+
+           var bla = $('#yMaxInput').val();
+           console.log(bla);
+           focus.selectAll('.area')
+           y.domain([0,bla]);
+        });
+
+
+
+        
+    });
 
 </script>
