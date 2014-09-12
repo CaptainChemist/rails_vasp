@@ -22,23 +22,21 @@
     .s{
         fill:red;
         fill-opacity: .6;
+        clip-path: url(#clip);
     }
     .p{
         fill:blue;
         fill-opacity: .6;
+        clip-path: url(#clip);
     }
     .d{
         fill:green;
         fill-opacity: .6;
+        clip-path: url(#clip);
     }
 
     svg {
       font: 10px sans-serif;
-    }
-
-    .area {
-      fill: steelblue;
-      clip-path: url(#clip);
     }
 
     .axis path,
@@ -136,12 +134,12 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
         results.push(tempResults);
 
-        <% if i == 1 %>
+        <% if i == 2 %>
             <% break %>
         <% end %>
 
     <% end %>
-
+    console.log(results);
 
     var margin = {top: 10, right: 10, bottom: 100, left: 40},
         margin2 = {top: 430, right: 10, bottom: 20, left: 40},
@@ -162,6 +160,11 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
         .x(x2)
         .on("brush", brushed);
 
+    var svg = d3.select("body")
+        .append("svg:svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+
     var area = d3.svg.area()
         .interpolate("monotone")
         .x(function(d) { return x(d.x); })
@@ -173,10 +176,6 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
         .x(function(d) { return x2(d.x); })
         .y0(height2)
         .y1(function(d) { return y2(d.y); });
-
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
 
     svg.append("defs").append("clipPath")
         .attr("id", "clip")
@@ -193,15 +192,25 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
         .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
     function dosPlot(results) {
-        console.log(results);
       x.domain([-15, 4]);
-      y.domain([0, 4]);
+      y.domain([0, 3]);
       x2.domain(x.domain());
       y2.domain(y.domain());
 
-      focus.append("path")
-          .data(results)
-          .attr("class", "area")
+      focus.selectAll(".area").data(results).enter()
+          .append("path")
+          .attr("id", function(d){ return d[0].orbital;})
+          .attr("class", function(d){
+                var t = parseInt(d[0].orbital.substring(2,3));
+                switch (t){
+                    case 0:
+                        return "area orb class s";
+                    case 1:
+                        return "area orb class p";
+                    case 2:
+                        return "area orb class d";
+                    }
+                })
           .attr("d", area);
 
       focus.append("g")
@@ -213,9 +222,20 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
           .attr("class", "y axis")
           .call(yAxis);
 
-      context.append("path")
-          .data(results)
-          .attr("class", "area")
+      context.selectAll(".area").data(results).enter()
+          .append("path")
+          .attr("id", function(d){ return d[0].orbital; })
+          .attr("class", function(d){
+                    var t = parseInt(d[0].orbital.substring(2,3));
+                    switch (t){
+                        case 0:
+                            return "area orb class s";
+                        case 1:
+                            return "area orb class p";
+                        case 2:
+                            return "area orb class d";
+                    }
+                })
           .attr("d", area2);
 
       context.append("g")
@@ -235,7 +255,7 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
     function brushed() {
       x.domain(brush.empty() ? x2.domain() : brush.extent());
-      focus.select(".area").attr("d", area);
+      focus.selectAll(".area").attr("d", area);
       focus.select(".x.axis").call(xAxis);
     }
 
