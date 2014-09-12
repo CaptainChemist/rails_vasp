@@ -105,23 +105,76 @@ Select/Deselect All <input type="checkbox" id="selectall" checked/>
 
 
 <script type="text/javascript">
+    function replot(results) {
+      y.domain([0, document.getElementById('yMaxInput').value]);
+      y2.domain(y.domain());
+
+      focus.selectAll(".area").data(results)
+          .attr("id", function(d){ return d[0].orbital;})
+          .attr("class", function(d){
+                var t = parseInt(d[0].orbital.substring(2,3));
+                switch (t){
+                    case 0:
+                        return "area orb class s";
+                    case 1:
+                        return "area orb class p";
+                    case 2:
+                        return "area orb class d";
+                    }
+                })
+          .attr("d", area);
+
+      focus.call(yAxis)
+          .append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
+
+      context.selectAll(".area").data(results)
+          .attr("id", function(d){ return d[0].orbital; })
+          .attr("class", function(d){
+                    var t = parseInt(d[0].orbital.substring(2,3));
+                    switch (t){
+                        case 0:
+                            return "area orb class s";
+                        case 1:
+                            return "area orb class p";
+                        case 2:
+                            return "area orb class d";
+                    }
+                })
+          .attr("d", area2);
+
+      context.call(yAxis2)
+          .append("g")
+          .selectAll("rect")
+          .attr("y", -6)
+          .attr("height", height2 + 7);
+    }
+
     function changeAxis(val) {
-        console.log(val);
+       
+        replot(results);
     }
 
     function updateTextInput(val) {
+      if (val < 0.1) {
+        val = 0.1;
+      }
       document.getElementById('yMaxInput').value=val;
-      changeAxis(val); 
+      replot(results); 
     }
 
     function updateRangeInput(val) {
+      if (val < 0.1) {
+        val = 0.1;
+      }
       document.getElementById('yMaxRange').value=val;
-      changeAxis(val); 
+      replot(results); 
     }
 </script>
 
 Y Max: 
-<input type="text" id="yMaxInput" value="10" min="0" max="50" onchange="updateRangeInput(this.value)">
+<input type="text" id="yMaxInput" value="10" min=".1" max="50" onchange="updateRangeInput(this.value)">
 <input type="range" name="rangeInput" id="yMaxRange" min="0" max="50" value="10" onchange="updateTextInput(this.value);">                                                       
 <br>
 
@@ -265,6 +318,7 @@ Y Max:
           .attr("y", -6)
           .attr("height", height2 + 7);
     }
+    
 
     dosPlot(results);
 
@@ -304,21 +358,7 @@ Y Max:
                 }); 
                 svg.selectAll(".orb").style("display", "none");        
             }
-        });
-
-        $('#yMaxInput').keypress(function(){
-
-
-
-           var bla = $('#yMaxInput').val();
-           console.log(bla);
-           focus.selectAll('.area')
-           y.domain([0,bla]);
-        });
-
-
-
-        
+        });      
     });
 
 </script>
