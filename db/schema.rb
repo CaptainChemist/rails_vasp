@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814051849) do
+ActiveRecord::Schema.define(version: 20140917164442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coords", force: true do |t|
+    t.integer  "name_id"
+    t.string   "atom"
+    t.string   "kind",       default: [], array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "coords", ["name_id"], name: "index_coords_on_name_id", using: :btree
 
   create_table "names", force: true do |t|
     t.string   "calc_name"

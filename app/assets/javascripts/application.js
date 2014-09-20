@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require d3
+//= require three
+//= require GLmol
 //= require_tree .

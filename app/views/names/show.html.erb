@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-
+<div id="glmol02" style="width: 600px; height: 400px; background-color: black;"></div> <textarea id="glmol02_src" style="display: none;">
+<% @name.coords.each_with_index do |coord, i| %>
+  <%= coord.atom %>
+<% end %>
+END
+</textarea>
 <p>
   <strong>Calc name:</strong>
   <%= @name.calc_name %>
@@ -293,3 +298,11 @@ Y Max:
     });
 
 </script>
+
+
+
+<script type="text/javascript">
+var glmol02 = new GLmol('glmol02');
+</script>
+
+

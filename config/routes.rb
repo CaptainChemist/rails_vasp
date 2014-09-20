@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
 
+  get 'coords/view'
+
   resources :names do
     resources :states
+    resources :coords
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
