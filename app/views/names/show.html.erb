@@ -1,83 +1,84 @@
-<p id="notice"><%= notice %></p>
-<div id="glmol02" style="width: 600px; height: 400px; background-color: black;"></div> <textarea id="glmol02_src" style="display: none;">
+<div id="prop">
+  <p>
+    <strong>Calc name:</strong>
+    <%= @name.calc_name %>
+  </p>
+  <p><%= @name.calc_num %></p>
+
+  <%= link_to 'Edit', edit_name_path(@name) %> |
+  <%= link_to 'Back', names_path %>
+
+  <table>
+      <tr>
+          <th>Atoms</th>
+          <th>s</th>
+          <th>p</th>
+          <th>d</th>
+      </tr>
+      <tr>
+          <% newAtom = 0 %>
+          <% @name.states.order('id ASC').each_with_index do |state, i| %>
+
+              <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
+
+              <% if state.orbital_subset == 0 && newAtom != 0 %>
+                  </tr>
+                  <% newAtom = 0 %>
+              <% end %>
+
+              <% if state.orbital_subset == 0 %>
+                  <td><%= state.atom_subset %></td>
+                  <td>
+                      <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked><input type='text' id="custom<%=identifier %>" value='red' />
+                  </td>
+                  <% newAtom += 1 %>
+              <% elsif state.orbital_subset == 1 %>
+                  <td>
+                      <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked><input type='text' id="custom<%=identifier %>" value='blue'/>
+                  </td>
+
+              <% else state.orbital_subset == 2 %>
+                  <td>
+                      <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked><input type='text' id="custom<%=identifier %>" value='green' />
+                  </td>
+              <% end %>
+          <% end %>
+      </tr>
+  </table>
+  <br>
+  Select/Deselect All <input type="checkbox" id="selectall" checked/>
+  <br>
+  <br>
+
+  Y Max: 
+  <input type="text" id="yMaxInput" value="10" min=".1" max="50" onchange="updateRangeInput(this.value)">
+  <input type="range" name="rangeInput" id="yMaxRange" min="0" max="50" value="10" onchange="updateTextInput(this.value);">                                                       
+  <br>
+
+</div>
+
+
+<div id="glmol02"></div> 
+<textarea id="glmol02_src" style="display: none;">
 <% @name.coords.each_with_index do |coord, i| %>
   <%= coord.atom %>
 <% end %>
 END
 </textarea>
-<p>
-  <strong>Calc name:</strong>
-  <%= @name.calc_name %>
-</p>
-<p><%= @name.calc_num %></p>
-
-<%= link_to 'Edit', edit_name_path(@name) %> |
-<%= link_to 'Back', names_path %>
-
-<table>
-    <tr>
-        <th>Atoms</th>
-        <th>s</th>
-        <th>p</th>
-        <th>d</th>
-    </tr>
-    <tr>
-        <% newAtom = 0 %>
-        <% @name.states.order('id ASC').each_with_index do |state, i| %>
-
-            <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
-
-            <% if state.orbital_subset == 0 && newAtom != 0 %>
-                </tr>
-                <% newAtom = 0 %>
-            <% end %>
-
-            <% if state.orbital_subset == 0 %>
-                <td><%= state.atom_subset %></td>
-                <td>
-                    <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                </td>
-                <% newAtom += 1 %>
-            <% elsif state.orbital_subset == 1 %>
-                <td>
-                    <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                </td>
-
-            <% else state.orbital_subset == 2 %>
-                <td>
-                    <input class="checkbox" type="checkbox" name="<%=identifier %>" value="<%=identifier %>" checked>
-                </td>
-            <% end %>
-        <% end %>
-    </tr>
-</table>
-<br>
-Select/Deselect All <input type="checkbox" id="selectall" checked/>
-<br>
-<br>
-
-Y Max: 
-<input type="text" id="yMaxInput" value="10" min=".1" max="50" onchange="updateRangeInput(this.value)">
-<input type="range" name="rangeInput" id="yMaxRange" min="0" max="50" value="10" onchange="updateTextInput(this.value);">                                                       
-<br>
 
 <div id="chart"></div>
 
-
-
+<%= javascript_include_tag 'dos' %>
 
 
 
 <script type="text/javascript">
-    var replot, updateRangeInput, updateTextInput;
-
     replot = function(results) {
       y.domain([0, document.getElementById("yMaxInput").value]);
       y2.domain(y.domain());
       focus.selectAll(".area").data(results).attr("id", function(d) {
         return d[0].orbital;
       }).attr("class", function(d) {
-        var t;
         t = parseInt(d[0].orbital.substring(2, 3));
         switch (t) {
           case 0:
@@ -295,14 +296,19 @@ Y Max:
                 svg.selectAll(".orb").style("display", "none");        
             }
         });
+
+        <% @name.states.order('id ASC').each_with_index do |state, i| %>
+          <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
+          $("#custom<%=identifier %>").spectrum({
+              showPallet: true,
+              pallet: ['black', 'white', 'blanchedalmond', 'rgb(255, 128, 0);', 'hsv 100 70 50'],
+              change: function(color) {
+                $("#<%= identifier %>").css("fill", color.toHexString());
+              }
+          });
+        <% end %>
     });
 
-</script>
-
-
-
-<script type="text/javascript">
-var glmol02 = new GLmol('glmol02');
 </script>
 
 
