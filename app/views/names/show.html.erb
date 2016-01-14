@@ -188,6 +188,8 @@ END
         .y0(height2)
         .y1(function(d) { return y2(d.y); });
 
+
+
     svg.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("rect")
@@ -300,8 +302,9 @@ END
         <% @name.states.order('id ASC').each_with_index do |state, i| %>
           <% identifier = "id" + state.orbital_subset.to_s + state.atom_subset[0].to_s %>
           $("#custom<%=identifier %>").spectrum({
-              showPallet: true,
-              pallet: ['black', 'white', 'blanchedalmond', 'rgb(255, 128, 0);', 'hsv 100 70 50'],
+              showPalette: true,
+              showInput: true,
+              palette: ['hsv 307, 100, 100','rgb(128, 0, 85);','hsv 286, 100, 57','hsv 61, 100, 100','rgb(255, 128, 0);','hsv 0, 43, 100','hsv 0, 100, 100','hsv 188, 100, 100','rgb(0, 0, 255);','hsv 0, 0, 72','hsv 0, 0, 20'],
               change: function(color) {
                 $("#<%= identifier %>").css("fill", color.toHexString());
               }
