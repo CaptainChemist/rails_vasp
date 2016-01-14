@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  root 'static_pages#home'
   get 'coords/view'
 
   resources :names do
