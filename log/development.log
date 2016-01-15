@@ -66674,3 +66674,328 @@ Started GET "/" for 127.0.0.1 at 2016-01-14 15:45:04 -0600
 Processing by Rails::WelcomeController#index as HTML
   Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/railties-4.1.4/lib/rails/templates/rails/welcome/index.html.erb (1.9ms)
 Completed 200 OK in 18ms (Views: 9.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-15 12:53:46 -0600
+
+PG::ConnectionBad (FATAL:  no pg_hba.conf entry for host "10.105.49.189", user "medea", database "rails_vasp_development", SSL off
+):
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `initialize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `new'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `connect'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:568:in `initialize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:41:in `new'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:41:in `postgresql_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:435:in `new_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:445:in `checkout_new_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `acquire_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:351:in `block in checkout'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:350:in `checkout'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:265:in `block in connection'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:264:in `connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:541:in `retrieve_connection'
+  activerecord (4.1.4) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+  activerecord (4.1.4) lib/active_record/connection_handling.rb:87:in `connection'
+  activerecord (4.1.4) lib/active_record/migration.rb:388:in `check_pending!'
+  activerecord (4.1.4) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.4) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.4) lib/rails/engine.rb:514:in `call'
+  railties (4.1.4) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.7ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (21.2ms)
+
+
+Started GET "/names" for 127.0.0.1 at 2016-01-15 13:28:39 -0600
+
+PG::ConnectionBad (FATAL:  no pg_hba.conf entry for host "10.105.49.189", user "medea", database "rails_vasp_development", SSL off
+):
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `initialize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `new'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `connect'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:568:in `initialize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:41:in `new'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:41:in `postgresql_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:435:in `new_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:445:in `checkout_new_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `acquire_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:351:in `block in checkout'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:350:in `checkout'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:265:in `block in connection'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:264:in `connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:541:in `retrieve_connection'
+  activerecord (4.1.4) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+  activerecord (4.1.4) lib/active_record/connection_handling.rb:87:in `connection'
+  activerecord (4.1.4) lib/active_record/migration.rb:388:in `check_pending!'
+  activerecord (4.1.4) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.4) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.4) lib/rails/engine.rb:514:in `call'
+  railties (4.1.4) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.7ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.9ms)
+
+
+Started GET "/names" for 127.0.0.1 at 2016-01-15 13:29:15 -0600
+
+PG::ConnectionBad (FATAL:  no pg_hba.conf entry for host "10.105.49.189", user "medea", database "rails_vasp_development", SSL off
+):
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `initialize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `new'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:888:in `connect'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:568:in `initialize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:41:in `new'
+  activerecord (4.1.4) lib/active_record/connection_adapters/postgresql_adapter.rb:41:in `postgresql_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:435:in `new_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:445:in `checkout_new_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `acquire_connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:351:in `block in checkout'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:350:in `checkout'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:265:in `block in connection'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:264:in `connection'
+  activerecord (4.1.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:541:in `retrieve_connection'
+  activerecord (4.1.4) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+  activerecord (4.1.4) lib/active_record/connection_handling.rb:87:in `connection'
+  activerecord (4.1.4) lib/active_record/migration.rb:388:in `check_pending!'
+  activerecord (4.1.4) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.4) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.4) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.4) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.4) lib/rails/engine.rb:514:in `call'
+  railties (4.1.4) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/sjensen/.rvm/rubies/ruby-2.1.2/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/sjensen/.rvm/gems/ruby-2.1.2/gems/actionpack-4.1.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (14.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-15 15:26:38 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (25.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 178ms (Views: 165.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/coords.css?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/names.css?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/states.css?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/spectrum.css?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/three.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/GLmol.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/coords.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/dos.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/states.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/prettify.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/assets/spectrum.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:39 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 12ms (Views: 11.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/three.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/GLmol.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/prettify.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/assets/spectrum.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:44 -0600
+
+
+Started GET "/names" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+Processing by NamesController#index as HTML
+  [1m[35mName Load (26.3ms)[0m  SELECT "names".* FROM "names"   ORDER BY id ASC
+  [1m[36mState Load (247.2ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38)[0m
+  Rendered names/index.html.erb within layouts/application (370.4ms)
+Completed 200 OK in 417ms (Views: 131.2ms | ActiveRecord: 279.4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/three.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/d3.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/GLmol.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/names.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/prettify.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/assets/spectrum.js?body=1" for 127.0.0.1 at 2016-01-15 15:26:49 -0600
+
+
+Started GET "/names/1" for 127.0.0.1 at 2016-01-15 15:26:51 -0600
+Processing by NamesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mName Load (1.6ms)[0m  SELECT  "names".* FROM "names"  WHERE "names"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mState Load (11.9ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCoord Load (13.3ms)[0m  SELECT "coords".* FROM "coords"  WHERE "coords"."name_id" = $1  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC  [["name_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "states".* FROM "states"  WHERE "states"."name_id" = $1  ORDER BY id ASC[0m  [["name_id", 1]]
+  Rendered names/show.html.erb within layouts/application (105.1ms)
+Completed 200 OK in 123ms (Views: 92.0ms | ActiveRecord: 27.7ms)
