@@ -27,3 +27,9 @@ In that demo, I disabled adding and editing new calculations and added bootstrap
 • Convert atom numbers into the atom type ex: "64","43","24" -> S$_{3}$ (In the coords database, if you search for a calculation ID and atom number it will return the atom type so this should be straightforward to add in the future)
 
 • New calculations page for specifying the calculation number, name, and desired orbital clustering which would get entered into the database, and then run the corresponding python script to populate all the data.
+
+== Python Parsing Scripts
+
+The scripts will extract density of states data from the output of a VASP Density Functional Theory Calculation and insert them into a local postgresql database. On the server with your density of state calculations, call pull_dos_calculation.py with the calculation number, and the script will go into the folder where Materials Design stores the VASP outputs, and then find the calculation number and pull the DOS data out of the DOSCAR and POSCAR data files and then insert it into the database. 
+ 
+Calculations can then be visualized and edited in the rails webapp.
