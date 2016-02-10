@@ -3,7 +3,9 @@
 This Rails Webapp is designed to allow easy viewing of density of state calculations that have been run with VASP an imported into a database.
 
 Please see a demo of this app here:
+
 http://www.stephenjensen.me/names
+
 In that demo, I disabled adding and editing new calculations and added bootstrap layout, but it is basically the same.
 
 Current features:
