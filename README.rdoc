@@ -2,11 +2,17 @@
 
 This Rails Webapp is designed to allow easy viewing of density of state calculations that have been run with VASP an imported into a database.
 
+Please see a demo of this app here:
+http://www.stephenjensen.me/names
+In that demo, I disabled adding and editing new calculations and added bootstrap layout, but it is basically the same.
+
 Current features:
 
 • /names/ -> a listing of all calculations which you can click on and see saved DOS
 
-• /names/:id -> Density of state calculations displayed with D3 which you can selectively display the orbitals you want
+• /names/:id -> Density of state calculations displayed with D3 that you can selectively display the orbitals you want
+
+• Focus and context brushing to zoom into a particular area of the plot you are interested in and set the Y max with a slider to the height you want.
 
 • Added color picking for all orbital types
 
@@ -14,7 +20,7 @@ Current features:
 
 Desired features:
 
-• Provide a method on the /names/ page to select particular calculations and corresponding orbitals. Each calculation would have a separate plot and the orbitals would all overlay in that plot. D3 would know how many calculations you wanted to display and confine all plots to the same 3.1"x3.1" area in the browser.
+• Provide a method on the /names page to select several calculations and corresponding orbitals. Each calculation would have a separate plot and the orbitals would all overlay in that plot. D3 would know how many calculations you wanted to display and confine all plots to the same div in the browser.
 
 • Convert atom numbers into the atom type ex: "64","43","24" -> S$_{3}$ (In the coords database, if you search for a calculation ID and atom number it will return the atom type so this should be straightforward to add in the future)
 
