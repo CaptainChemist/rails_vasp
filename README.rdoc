@@ -8,7 +8,7 @@ http://www.stephenjensen.me/names
 
 In that demo, I disabled adding and editing new calculations and added bootstrap layout, but it is basically the same.
 
-Current features:
+== Current features:
 
 • /names/ -> a listing of all calculations which you can click on and see saved DOS
 
@@ -20,7 +20,7 @@ Current features:
 
 • You can now see the atoms in the calculation itself using GLmol viewer
 
-Desired features:
+== Desired features:
 
 • Provide a method on the /names page to select several calculations and corresponding orbitals. Each calculation would have a separate plot and the orbitals would all overlay in that plot. D3 would know how many calculations you wanted to display and confine all plots to the same div in the browser.
 
